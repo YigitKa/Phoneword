@@ -13,10 +13,8 @@ public partial class MainPage : ContentPage
 	{
 		count++;
 
-		if (count == 1)
-			CounterBtn.Text = $"Clicked {count} time";
-		else
-			CounterBtn.Text = $"Clicked {count} times";
+		if (count > 0)
+			CounterBtn.Text = $"{count} kez tıklandı :)"; // build test
 
 		SemanticScreenReader.Announce(CounterBtn.Text);
 	}
