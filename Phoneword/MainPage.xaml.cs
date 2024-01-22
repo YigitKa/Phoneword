@@ -1,12 +1,17 @@
-﻿namespace Phoneword;
+﻿using System.Collections.ObjectModel;
+
+namespace Phoneword;
 
 public partial class MainPage : ContentPage
 {
 	public MainPage()
 	{
 		InitializeComponent();
-	}
+
+    }
+
     string translatedNumber;
+    ObservableCollection<string> recentCalls = new ObservableCollection<string>(); // geçmiş aramalar
 
 
     private void OnTranslate(object sender, EventArgs e)
@@ -38,6 +43,10 @@ public partial class MainPage : ContentPage
             {
                 if (PhoneDialer.Default.IsSupported)
                     PhoneDialer.Default.Open(translatedNumber);
+                    // geçmiş aramalara ekle
+                    recentCalls.Add(translatedNumber);
+                    ctlListRecentCalls.ItemsSource = recentCalls;
+
             }
             catch (ArgumentNullException)
             {
